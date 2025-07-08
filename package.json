@@ -1,26 +1,27 @@
 {
-	"name": "letmeask-agents-server",
-	"version": "1.0.0",
-	"description": "",
-	"main": "src/server.ts",
-	"type": "module",
-	"scripts": {
-		"start": "node --env-file .env --experimental-strip-types --no-warnings src/server.ts",
-		"dev": "node --env-file .env --experimental-strip-types --no-warnings --watch src/server.ts"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"packageManager": "pnpm@10.12.4",
-	"devDependencies": {
-		"@types/node": "24.0.11",
-		"typescript": "5.8.3"
-	},
-	"dependencies": {
-		"@biomejs/biome": "2.1.0",
-		"@fastify/cors": "11.0.1",
-		"fastify": "5.4.0",
-		"fastify-type-provider-zod": "5.0.2",
-		"zod": "3.25.76"
-	}
+  "name": "letmeask-agents-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.ts",
+  "type": "module",
+  "scripts": {
+    "start": "node --env-file .env --experimental-strip-types --no-warnings src/server.ts",
+    "dev": "node --env-file .env --experimental-strip-types --no-warnings --watch src/server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.12.4",
+  "dependencies": {
+    "@fastify/cors": "11.0.1",
+    "fastify": "5.4.0",
+    "fastify-type-provider-zod": "5.0.2",
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.0.6",
+    "@types/node": "24.0.11",
+    "typescript": "5.8.3",
+    "ultracite": "5.0.32"
+  }
 }
