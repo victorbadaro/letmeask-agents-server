@@ -5,6 +5,7 @@ import {
 	validatorCompiler,
 	type ZodTypeProvider
 } from 'fastify-type-provider-zod';
+import { env } from './env.ts';
 
 const app = fastify().withTypeProvider<ZodTypeProvider>();
 
@@ -15,6 +16,10 @@ app.register(fastifyCors, {
 app.setSerializerCompiler(serializerCompiler);
 app.setValidatorCompiler(validatorCompiler);
 
-app.listen({ port: 3333 }).then(() => {
+app.get('/health', () => {
+	return 'OK';
+});
+
+app.listen({ port: env.PORT }).then(() => {
 	console.log('HTTP Server running!');
 });
