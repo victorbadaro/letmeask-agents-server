@@ -62,7 +62,7 @@ pnpm drizzle-kit migrate
 
 ### 6. (Opcional) Popule o banco com dados iniciais
 ```bash
-pnpm run db:seed
+pnpm db:seed
 ```
 
 ### 7. Inicie o servidor
@@ -76,9 +76,9 @@ pnpm start
 
 ## 🔧 Scripts Disponíveis
 
-- `pnpm run dev` - Inicia o servidor em modo desenvolvimento
+- `pnpm dev` - Inicia o servidor em modo desenvolvimento
 - `pnpm start` - Inicia o servidor em modo produção
-- `pnpm run db:seed` - Popula o banco com dados iniciais
+- `pnpm db:seed` - Popula o banco com dados iniciais
 
 ## 📊 Endpoints
 
