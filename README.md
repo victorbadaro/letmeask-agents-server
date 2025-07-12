@@ -86,6 +86,8 @@ pnpm start
 
 - `GET /health` - Verificação de saúde da aplicação
 - `GET /rooms` - Lista todas as salas disponíveis
+- `POST /rooms` - Cria uma nova sala
+- `GET /rooms/:roomId/questions` - Lista todas as perguntas de uma sala específica
 
 ## 🗄️ Banco de Dados
 
@@ -95,6 +97,13 @@ O projeto utiliza PostgreSQL com a extensão pgvector para operações com vetor
   - `id` (UUID) - Identificador único
   - `name` (TEXT) - Nome da sala
   - `description` (TEXT) - Descrição da sala
+  - `created_at` (TIMESTAMP) - Data de criação
+
+- **questions** - Tabela para armazenar as perguntas das salas
+  - `id` (UUID) - Identificador único
+  - `roomId` (UUID) - Referência à sala (FK para rooms.id)
+  - `question` (TEXT) - Texto da pergunta
+  - `answer` (TEXT) - Resposta da pergunta (opcional)
   - `created_at` (TIMESTAMP) - Data de criação
 
 ## 📝 Desenvolvimento
