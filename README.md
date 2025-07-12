@@ -57,7 +57,7 @@ docker compose up -d
 
 ### 5. Execute as migrações do banco
 ```bash
-pnpm drizzle-kit migrate
+pnpm db:migrate
 ```
 
 ### 6. (Opcional) Popule o banco com dados iniciais
@@ -78,6 +78,8 @@ pnpm start
 
 - `pnpm dev` - Inicia o servidor em modo desenvolvimento
 - `pnpm start` - Inicia o servidor em modo produção
+- `pnpm db:generate` - Gera arquivos de migração do banco de dados
+- `pnpm db:migrate` - Executa as migrações do banco de dados
 - `pnpm db:seed` - Popula o banco com dados iniciais
 
 ## 📊 Endpoints
