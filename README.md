@@ -78,6 +78,7 @@ pnpm start
 
 - `pnpm dev` - Inicia o servidor em modo desenvolvimento
 - `pnpm start` - Inicia o servidor em modo produção
+- `pnpm db:studio` - Abre o Drizzle Studio para visualizar e editar o banco de dados
 - `pnpm db:generate` - Gera arquivos de migração do banco de dados
 - `pnpm db:migrate` - Executa as migrações do banco de dados
 - `pnpm db:seed` - Popula o banco com dados iniciais
