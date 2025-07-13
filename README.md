@@ -89,6 +89,7 @@ pnpm start
 - `GET /rooms` - Lista todas as salas disponíveis
 - `POST /rooms` - Cria uma nova sala
 - `GET /rooms/:roomId/questions` - Lista todas as perguntas de uma sala específica
+- `POST /rooms/:roomId/questions` - Cria uma nova pergunta em uma sala específica
 
 ## 🗄️ Banco de Dados
 
