@@ -15,6 +15,13 @@
       "when": 1752352208111,
       "tag": "0001_calm_mikhail_rasputin",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1755384911556,
+      "tag": "0002_breezy_captain_midlands",
+      "breakpoints": true
     }
   ]
 }
