@@ -1,177 +1,177 @@
 # NLW Agents
 
-Projeto desenvolvido durante o evento da **Rocketseat** para criar uma API de gerenciamento de salas com integração de agentes inteligentes.
+Project developed during the **Rocketseat** event to create a room management API with intelligent agent integration.
 
-## 🚀 Tecnologias Utilizadas
+## 🚀 Technologies Used
 
-- **Node.js** - Runtime JavaScript
-- **TypeScript** - Tipagem estática
-- **Fastify** - Framework web rápido e eficiente
-- **Drizzle ORM** - ORM moderno para TypeScript
-- **PostgreSQL** - Banco de dados relacional
-- **pgvector** - Extensão para operações com vetores
-- **Google Gemini AI** - IA para transcrição de áudio e geração de embeddings
-- **Zod** - Validação de esquemas
-- **Docker** - Containerização
-- **Biome** - Linter e formatador de código
+- **Node.js** - JavaScript runtime
+- **TypeScript** - Static typing
+- **Fastify** - Fast and efficient web framework
+- **Drizzle ORM** - Modern ORM for TypeScript
+- **PostgreSQL** - Relational database
+- **pgvector** - Extension for vector operations
+- **Google Gemini AI** - AI for audio transcription and embedding generation
+- **Zod** - Schema validation
+- **Docker** - Containerization
+- **Biome** - Code linter and formatter
 
-## 🏢️ Arquitetura e Padrões
+## 🏢️ Architecture and Patterns
 
-- **API REST** com Fastify
-- **Type Safety** com TypeScript e Zod
-- **Database First** com Drizzle ORM
-- **Vector Database** com pgvector para embeddings
-- **RAG (Retrieval-Augmented Generation)** para respostas contextualizadas
-- **Semantic Search** com similaridade de vetores
-- **AI Services** com Google Gemini para transcrição, embeddings e geração de respostas
-- **Multipart Upload** para processamento de arquivos de áudio
-- **Environment Variables** para configuração
-- **Containerização** com Docker Compose
-- **Validação de entrada** com fastify-type-provider-zod
+- **REST API** with Fastify
+- **Type Safety** with TypeScript and Zod
+- **Database First** with Drizzle ORM
+- **Vector Database** with pgvector for embeddings
+- **RAG (Retrieval-Augmented Generation)** for contextualized responses
+- **Semantic Search** with vector similarity
+- **AI Services** with Google Gemini for transcription, embeddings and response generation
+- **Multipart Upload** for audio file processing
+- **Environment Variables** for configuration
+- **Containerization** with Docker Compose
+- **Input validation** with fastify-type-provider-zod
 
-## 📋 Pré-requisitos
+## 📋 Prerequisites
 
-- Node.js 18+ (com suporte a `--experimental-strip-types`)
-- Docker e Docker Compose
-- pnpm (gerenciador de pacotes)
+- Node.js 18+ (with `--experimental-strip-types` support)
+- Docker and Docker Compose
+- pnpm (package manager)
 
-## ⚙️ Configuração e Setup
+## ⚙️ Configuration and Setup
 
-### 1. Clone o repositório
+### 1. Clone the repository
 ```bash
 git clone https://github.com/victorbadaro/letmeask-agents-server
 cd letmeask-agents-server
 ```
 
-### 2. Instale as dependências
+### 2. Install dependencies
 ```bash
 pnpm install
 ```
 
-### 3. Configure as variáveis de ambiente
-Crie um arquivo `.env` na raiz do projeto:
+### 3. Configure environment variables
+Create a `.env` file in the project root:
 
 ```env
 PORT=3333
 DATABASE_URL=postgresql://docker:docker@localhost:5432/agents
-GEMINI_API_KEY=sua_chave_da_api_do_gemini
+GEMINI_API_KEY=your_gemini_api_key
 ```
 
-> **Nota:** Para obter a chave da API do Gemini, acesse [Google AI Studio](https://aistudio.google.com/) e gere uma nova chave de API.
+> **Note:** To get the Gemini API key, visit [Google AI Studio](https://aistudio.google.com/) and generate a new API key.
 
-### 4. Inicie o banco de dados
+### 4. Start the database
 ```bash
 docker compose up -d
 ```
 
-### 5. Execute as migrações do banco
+### 5. Run database migrations
 ```bash
 pnpm db:migrate
 ```
 
-### 6. (Opcional) Popule o banco com dados iniciais
+### 6. (Optional) Populate the database with initial data
 ```bash
 pnpm db:seed
 ```
 
-### 7. Inicie o servidor
+### 7. Start the server
 ```bash
-# Modo desenvolvimento
+# Development mode
 pnpm dev
 
-# Modo produção
+# Production mode
 pnpm start
 ```
 
-## 🔧 Scripts Disponíveis
+## 🔧 Available Scripts
 
-- `pnpm dev` - Inicia o servidor em modo desenvolvimento
-- `pnpm start` - Inicia o servidor em modo produção
-- `pnpm db:studio` - Abre o Drizzle Studio para visualizar e editar o banco de dados
-- `pnpm db:generate` - Gera arquivos de migração do banco de dados
-- `pnpm db:migrate` - Executa as migrações do banco de dados
-- `pnpm db:seed` - Popula o banco com dados iniciais
+- `pnpm dev` - Starts the server in development mode
+- `pnpm start` - Starts the server in production mode
+- `pnpm db:studio` - Opens Drizzle Studio to view and edit the database
+- `pnpm db:generate` - Generates database migration files
+- `pnpm db:migrate` - Runs database migrations
+- `pnpm db:seed` - Populates the database with initial data
 
 ## 📊 Endpoints
 
-- `GET /health` - Verificação de saúde da aplicação
-- `GET /rooms` - Lista todas as salas disponíveis
-- `POST /rooms` - Cria uma nova sala
-- `GET /rooms/:roomId/questions` - Lista todas as perguntas de uma sala específica
-- `POST /rooms/:roomId/questions` - Cria uma nova pergunta e gera resposta automaticamente usando RAG
-- `POST /rooms/:roomId/audio` - Faz upload de áudio para transcrição e geração de embeddings
+- `GET /health` - Application health check
+- `GET /rooms` - Lists all available rooms
+- `POST /rooms` - Creates a new room
+- `GET /rooms/:roomId/questions` - Lists all questions from a specific room
+- `POST /rooms/:roomId/questions` - Creates a new question and automatically generates an answer using RAG
+- `POST /rooms/:roomId/audio` - Uploads audio for transcription and embedding generation
 
-## 🤖 Funcionalidades de IA
+## 🤖 AI Features
 
-O projeto integra o Google Gemini AI para fornecer recursos avançados de processamento de áudio e texto:
+The project integrates Google Gemini AI to provide advanced audio and text processing capabilities:
 
-### Transcrição de Áudio
-- **Modelo utilizado:** `gemini-2.5-flash`
-- **Funcionalidade:** Converte arquivos de áudio para texto em português brasileiro
-- **Características:** Transcrição precisa e natural com pontuação adequada
+### Audio Transcription
+- **Model used:** `gemini-2.5-flash`
+- **Functionality:** Converts audio files to Brazilian Portuguese text
+- **Features:** Accurate and natural transcription with proper punctuation
 
-### Geração de Embeddings
-- **Modelo utilizado:** `text-embedding-004`
-- **Funcionalidade:** Converte texto em vetores de 768 dimensões
-- **Propósito:** Permite busca semântica e similaridade entre conteúdos
-- **Armazenamento:** Utiliza pgvector para operações eficientes com vetores
+### Embedding Generation
+- **Model used:** `text-embedding-004`
+- **Functionality:** Converts text to 768-dimensional vectors
+- **Purpose:** Enables semantic search and content similarity
+- **Storage:** Uses pgvector for efficient vector operations
 
-### Busca Semântica e RAG
-- **Similaridade por Cosseno:** Utiliza operação `<=>` do pgvector para cálculo de distância
-- **Threshold de Similaridade:** 0.7 (scores acima indicam alta relevância)
-- **Limite de Resultados:** Até 3 chunks mais relevantes por consulta
-- **Contexto Inteligente:** Combina múltiplas transcrições para respostas mais precisas
+### Semantic Search and RAG
+- **Cosine Similarity:** Uses pgvector's `<=>` operation for distance calculation
+- **Similarity Threshold:** 0.7 (scores above indicate high relevance)
+- **Result Limit:** Up to 3 most relevant chunks per query
+- **Intelligent Context:** Combines multiple transcriptions for more accurate responses
 
-### Geração de Respostas Contextualizadas
-- **Modelo utilizado:** `gemini-2.5-flash`
-- **Abordagem:** RAG (Retrieval-Augmented Generation)
-- **Processo:** Busca conteúdo relevante e gera resposta baseada no contexto
-- **Características:** Respostas em português, ton educativo, citações do "conteúdo da aula"
+### Contextualized Response Generation
+- **Model used:** `gemini-2.5-flash`
+- **Approach:** RAG (Retrieval-Augmented Generation)
+- **Process:** Searches relevant content and generates context-based responses
+- **Features:** Responses in Portuguese, educational tone, citations from "class content"
 
-### Fluxo de Processamento de Áudio
-1. **Upload:** Arquivo de áudio é enviado via multipart/form-data
-2. **Transcrição:** Gemini AI converte o áudio em texto
-3. **Embeddings:** Texto é transformado em vetor de embeddings
-4. **Armazenamento:** Transcrição e embeddings são salvos no banco de dados
-5. **Resposta:** Retorna o ID do chunk criado para referência futura
+### Audio Processing Flow
+1. **Upload:** Audio file is sent via multipart/form-data
+2. **Transcription:** Gemini AI converts audio to text
+3. **Embeddings:** Text is transformed into embedding vectors
+4. **Storage:** Transcription and embeddings are saved to the database
+5. **Response:** Returns the created chunk ID for future reference
 
-### Fluxo de Processamento de Perguntas
-1. **Pergunta:** Usuário envia uma pergunta via API
-2. **Embedding da Pergunta:** Pergunta é convertida em vetor de embeddings
-3. **Busca Semântica:** Sistema busca chunks de áudio similares (similaridade > 0.7)
-4. **Seleção de Contexto:** Até 3 transcrições mais relevantes são selecionadas
-5. **Geração de Resposta:** Gemini AI gera resposta baseada no contexto encontrado
-6. **Armazenamento:** Pergunta e resposta são salvas no banco de dados
-7. **Resposta:** Retorna o ID da pergunta e a resposta gerada
+### Question Processing Flow
+1. **Question:** User sends a question via API
+2. **Question Embedding:** Question is converted to embedding vectors
+3. **Semantic Search:** System searches for similar audio chunks (similarity > 0.7)
+4. **Context Selection:** Up to 3 most relevant transcriptions are selected
+5. **Response Generation:** Gemini AI generates response based on found context
+6. **Storage:** Question and answer are saved to the database
+7. **Response:** Returns the question ID and generated answer
 
-## 🗄️ Banco de Dados
+## 🗄️ Database
 
-O projeto utiliza PostgreSQL com a extensão pgvector para operações com vetores. A estrutura principal inclui:
+The project uses PostgreSQL with the pgvector extension for vector operations. The main structure includes:
 
-- **rooms** - Tabela para armazenar informações das salas
-  - `id` (UUID) - Identificador único
-  - `name` (TEXT) - Nome da sala
-  - `description` (TEXT) - Descrição da sala
-  - `created_at` (TIMESTAMP) - Data de criação
+- **rooms** - Table to store room information
+  - `id` (UUID) - Unique identifier
+  - `name` (TEXT) - Room name
+  - `description` (TEXT) - Room description
+  - `created_at` (TIMESTAMP) - Creation date
 
-- **questions** - Tabela para armazenar as perguntas das salas
-  - `id` (UUID) - Identificador único
-  - `roomId` (UUID) - Referência à sala (FK para rooms.id)
-  - `question` (TEXT) - Texto da pergunta
-  - `answer` (TEXT) - Resposta da pergunta (opcional)
-  - `created_at` (TIMESTAMP) - Data de criação
+- **questions** - Table to store room questions
+  - `id` (UUID) - Unique identifier
+  - `roomId` (UUID) - Room reference (FK to rooms.id)
+  - `question` (TEXT) - Question text
+  - `answer` (TEXT) - Question answer (optional)
+  - `created_at` (TIMESTAMP) - Creation date
 
-- **audio_chunks** - Tabela para armazenar transcrições de áudio e embeddings
-  - `id` (UUID) - Identificador único
-  - `room_id` (UUID) - Referência à sala (FK para rooms.id)
-  - `transcription` (TEXT) - Transcrição do áudio em texto
-  - `embeddings` (VECTOR(768)) - Vetor de embeddings gerado pela IA
-  - `created_at` (TIMESTAMP) - Data de criação
+- **audio_chunks** - Table to store audio transcriptions and embeddings
+  - `id` (UUID) - Unique identifier
+  - `room_id` (UUID) - Room reference (FK to rooms.id)
+  - `transcription` (TEXT) - Audio transcription in text
+  - `embeddings` (VECTOR(768)) - Embedding vectors generated by AI
+  - `created_at` (TIMESTAMP) - Creation date
 
-## 📝 Desenvolvimento
+## 📝 Development
 
-O projeto está configurado para usar o novo suporte experimental do Node.js para TypeScript (`--experimental-strip-types`), eliminando a necessidade de transpilação durante o desenvolvimento.
+The project is configured to use Node.js's new experimental TypeScript support (`--experimental-strip-types`), eliminating the need for transpilation during development.
 
 ---
 
-Desenvolvido com ❤️ durante o evento NLW da Rocketseat
+Developed with ❤️ during the Rocketseat NLW event
