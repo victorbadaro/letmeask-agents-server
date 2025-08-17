@@ -21,7 +21,9 @@ Projeto desenvolvido durante o evento da **Rocketseat** para criar uma API de ge
 - **Type Safety** com TypeScript e Zod
 - **Database First** com Drizzle ORM
 - **Vector Database** com pgvector para embeddings
-- **AI Services** com Google Gemini para transcrição e embeddings
+- **RAG (Retrieval-Augmented Generation)** para respostas contextualizadas
+- **Semantic Search** com similaridade de vetores
+- **AI Services** com Google Gemini para transcrição, embeddings e geração de respostas
 - **Multipart Upload** para processamento de arquivos de áudio
 - **Environment Variables** para configuração
 - **Containerização** com Docker Compose
@@ -96,7 +98,7 @@ pnpm start
 - `GET /rooms` - Lista todas as salas disponíveis
 - `POST /rooms` - Cria uma nova sala
 - `GET /rooms/:roomId/questions` - Lista todas as perguntas de uma sala específica
-- `POST /rooms/:roomId/questions` - Cria uma nova pergunta em uma sala específica
+- `POST /rooms/:roomId/questions` - Cria uma nova pergunta e gera resposta automaticamente usando RAG
 - `POST /rooms/:roomId/audio` - Faz upload de áudio para transcrição e geração de embeddings
 
 ## 🤖 Funcionalidades de IA
@@ -114,12 +116,33 @@ O projeto integra o Google Gemini AI para fornecer recursos avançados de proces
 - **Propósito:** Permite busca semântica e similaridade entre conteúdos
 - **Armazenamento:** Utiliza pgvector para operações eficientes com vetores
 
-### Fluxo de Processamento
+### Busca Semântica e RAG
+- **Similaridade por Cosseno:** Utiliza operação `<=>` do pgvector para cálculo de distância
+- **Threshold de Similaridade:** 0.7 (scores acima indicam alta relevância)
+- **Limite de Resultados:** Até 3 chunks mais relevantes por consulta
+- **Contexto Inteligente:** Combina múltiplas transcrições para respostas mais precisas
+
+### Geração de Respostas Contextualizadas
+- **Modelo utilizado:** `gemini-2.5-flash`
+- **Abordagem:** RAG (Retrieval-Augmented Generation)
+- **Processo:** Busca conteúdo relevante e gera resposta baseada no contexto
+- **Características:** Respostas em português, ton educativo, citações do "conteúdo da aula"
+
+### Fluxo de Processamento de Áudio
 1. **Upload:** Arquivo de áudio é enviado via multipart/form-data
 2. **Transcrição:** Gemini AI converte o áudio em texto
 3. **Embeddings:** Texto é transformado em vetor de embeddings
 4. **Armazenamento:** Transcrição e embeddings são salvos no banco de dados
 5. **Resposta:** Retorna o ID do chunk criado para referência futura
+
+### Fluxo de Processamento de Perguntas
+1. **Pergunta:** Usuário envia uma pergunta via API
+2. **Embedding da Pergunta:** Pergunta é convertida em vetor de embeddings
+3. **Busca Semântica:** Sistema busca chunks de áudio similares (similaridade > 0.7)
+4. **Seleção de Contexto:** Até 3 transcrições mais relevantes são selecionadas
+5. **Geração de Resposta:** Gemini AI gera resposta baseada no contexto encontrado
+6. **Armazenamento:** Pergunta e resposta são salvas no banco de dados
+7. **Resposta:** Retorna o ID da pergunta e a resposta gerada
 
 ## 🗄️ Banco de Dados
 
